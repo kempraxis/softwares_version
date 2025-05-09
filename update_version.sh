@@ -1,0 +1,282 @@
+#!/bin/bash
+
+# Kinyeri a legfrissebb verziót
+HETZIP=$(curl -s https://www.7-zip.org/ | grep -Eo -m 1 "24\.[0-9]+<" | cut -d "<" -f1)
+AUDACITY=$(curl -s https://www.audacityteam.org/download/windows/ | grep -Eo -m 1 "audacity-win-.*?-64bit.exe" | cut -d "-" -f3)
+AUTOSPY=$(curl -s https://www.autopsy.com/download/ | grep -Eo 'autopsy-[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+AVIDEMUX=$(curl -s https://sourceforge.net/projects/avidemux/files/avidemux/ | grep -Eo '2\.[0-9]+\.[0-9]+' | sort -Vr | head -n 1)
+BLENDER=$(curl -s https://www.blender.org/download/ | grep -Eo -m 1 "blender-.*?-windows-x64.msi" | cut -d "-" -f2)
+CALIBRE=$(curl -s https://calibre-ebook.com/download_windows | grep -Eo 'calibre-64bit-[0-9]+\.[0-9]+\.[0-9]+\.msi' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+CAMSTUDIO=$(curl -s https://camstudio.org/ | grep -Eo "New Version [0-9]+\.[0-9]+" | head -n 1 | awk '{print $3}')
+CCA=$(curl -s https://www.tpgi.com/color-contrast-checker/ | grep -Eo 'CCA-Setup-[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+CDBURNERXP=$(curl -s https://cdburnerxp.se/ | grep -oP 'Version \K[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | awk '{print $1}')
+CYBERDUCK=$(curl -s https://cyberduck.io/changelog/ | grep -Eo 'Cyberduck-Installer-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.msi' | sed -E 's/Cyberduck-Installer-([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\.msi/\1/' | sort -V | tail -n 1)
+DBEAVER=$(curl -s https://dbeaver.io/download/ | grep -Eo -m 1 'DBeaver Community [0-9]+\.[0-9]+\.[0-9]+'| grep -Eo '[0-9]+\.[0-9]+\.[0-9]')
+DITTO=$(curl -s https://ditto-cp.sourceforge.io/ | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+DOUBLECMD=$(curl -s https://sourceforge.net/p/doublecmd/wiki/Download/ | grep -Eo -m 1 'doublecmd-.*?\.x86_64-win64\.msi' | cut -d ">" -f1 | sed -E 's/^[^-]+-([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+FASTSTONE=$(curl -s https://www.faststone.org/FSIVDownload.htm | grep -Eo "FastStone Image Viewer [0-9]+\.[0-9]+" | grep -Eo '[0-9]+\.[0-9]+')
+FIREFOXESR=$(curl -s https://ftp.mozilla.org/pub/firefox/releases/ | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+esr'| sort -V | tail -n 1)
+FREECAD=$(curl -s https://www.freecad.org/downloads.php | grep -Eo -m 1 'FreeCAD.*?\.[0-9]+\.[0-9]+' | cut -d "/" -f5)
+GEOGEBRA=$(curl -s https://download.geogebra.org/installers/6.0/ | grep -Eo "GeoGebra-Windows-Installer-[0-9]+-[0-9]+-[0-9]+-[0-9]+\.msi" | grep -Eo "[0-9]+-[0-9]+-[0-9]+-[0-9]+" | sort -V | tail -n1)
+GIMP=$(curl -s https://www.gimp.org/ | grep -Eo 'DOWNLOAD .*[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+GIT=$(curl -s https://git-scm.com/downloads/win | grep -Eo -m 1 'Git-[0-9]+\.[0-9]+\.[0-9]-64-bit.exe' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+GRETL=$(curl -s https://gretl.sourceforge.net/win32/ | grep -Eo "gretl-[0-9]+[a-z]-64.exe" | grep -Eo -m 1 "[0-9]+[a-z]")
+HANDBRAKE=$(curl -s https://handbrake.fr/downloads.php | grep -oP 'Current Version\: \K[0-9.]+')
+IRFANVIEW=$(curl -s https://www.irfanview.com/64bit.htm | grep -Eo "Version [0-9]+\.[0-9]+" |  grep -Eo -m 1 "[0-9]+\.[0-9]+")
+JASP=$(curl -s https://jasp-stats.org/download/ | grep -Eo "JASP [0-9]+\.[0-9]+\.[0-9]+" | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+KDENLIVE=$(curl -s https://kdenlive.org/download/ | grep -Eo 'kdenlive-[0-9]+\.[0-9]+\.[0-9]+' | sed -E 's/.*kdenlive-([0-9]+\.[0-9]+\.[0-9]+).*/\1/' | sort -V | tail -n 1)
+KEEPASS=$(curl -s https://keepass.info/download.html | grep -Eo -m 1 'KeePass-.*?-Setup.exe' | grep -Eo '[0-9]+\.[0-9]+')
+LIBREOFFICE=$(curl -s https://www.libreoffice.org/download/download-libreoffice/ | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+LOGEXPERT=$(curl -s https://github.com/LogExperts/LogExpert/releases | grep -Eo "Release [0-9]+\.[0-9]+\.[0-9]+" | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+NOTEPADPLSZ=$(curl -s https://notepad-plus-plus.org/ | sed -n 's/.*Current Version \([0-9.]*\).*/\1/p')
+OBSSTUDIO=$(curl -s https://obsproject.com/ | grep -Eo 'OBS-Studio-.*?-Windows-Installer.exe' | cut -d '-' -f3)
+OPENJDK=$(curl -s https://api.adoptium.net/v3/assets/latest/8/hotspot | grep -oE 'OpenJDK8U-jdk_x64_windows_hotspot_8u[0-9]+[a-z][0-9]+\.msi' | grep -oE -m 1 '8u[0-9]+[a-z][0-9]+')
+OPENSHELL=$(curl -s https://github.com/Open-Shell/Open-Shell-Menu/releases | grep -Eo "4\.4\.[0-9]+" | sort -V | tail -n 1)
+OPENSHOT=$(curl -s https://www.openshot.org/ | grep -Eo "Download v[0-9]+\.[0-9]+\.[0-9]+" | sed -E "s/Download v([0-9]+\.[0-9]+\.[0-9]+)/\1/")
+OPERA=$(curl -s https://get.geo.opera.com/pub/opera/desktop/ | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort -V | tail -n 1)
+PAC=$(curl -s https://pac.pdf-accessibility.org/en/download | grep -Eo 'PAC_[0-9]+\.[0-9]+\.[0-9]+\.0\.zip' | sed -E 's/PAC_([0-9]+\.[0-9]+\.[0-9]+)\.0\.zip/\1/' | sort -uV | tail -n 1)
+PEAZIP=$(curl -s https://peazip.github.io/peazip-64bit.html | grep -Eo 'peazip-[0-9]+\.[0-9]+\.[0-9]+\.WIN64.exe' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+PDF24=$(curl -s https://tools.pdf24.org/hu/creator | grep -Eo -m 1 '.*[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+PDFSAM=$(curl -s https://pdfsam.org/download-pdfsam-basic/ | grep -Eo -m 1 "Download PDFsam Basic v[0-9]+\.[0-9]+\.[0-9]+"  | sed -E "s/Download PDFsam Basic v([0-9]+\.[0-9]+\.[0-9]+)/\1/")
+PHOENIXCODE=$(curl -s https://github.com/phcode-dev/phoenix-desktop/releases | grep -oP 'Phoenix\.Code_\K[0-9]+\.[0-9]+\.[0-9]+(?=_x64-setup\.exe)' | head -n 1)
+POWERSHELL7=$(curl -s https://learn.microsoft.com/hu-hu/powershell/scripting/install/installing-powershell-on-windows\?view\=powershell-7.5 | grep -Eo 'PowerShell-[0-9]+\.[0-9]+\.[0-9]+-win-x64.msi'| grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+PUTTY=$(curl -s https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html | grep -Eo -m 1 'Download PuTTY: latest release \([0-9.]+\)' | sed -E 's/.*\(([0-9.]+)\).*/\1/')
+RPROGRAM=$(curl -s https://cloud.r-project.org/bin/windows/base/ | grep -Eo -m 1 "R-[0-9]+\.[0-9]+\.[0-9]+ for Windows" | sed -E "s/R-([0-9]+\.[0-9]+\.[0-9]+) for Windows/\1/")
+RSTUDIO=$(curl -s https://posit.co/download/rstudio-desktop/ | grep -Eo -m 1 'RStudio-[0-9]+\.[0-9]+\.[0-9]-[0-9]+\.exe' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]-[0-9]+')
+SEB=$(curl -s https://safeexambrowser.org/download_en.html | grep -oP -m 1 'Safe Exam Browser \K[0-9.]+')
+SHOTCUT=$(curl -s https://shotcut.org/download/ | grep -oP 'Current Version\: \K[0-9.]+')
+SIGIL=$(curl -s https://sigil-ebook.com/sigil/download/ | grep -Eo 'Sigil-[0-9]+\.[0-9]+\.[0-9]+-Windows-x64-Setup.exe'| grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+SOAPUI=$(curl -s https://www.soapui.org/downloads/latest-release/ | grep -oP 'Latest SoapUI Open Source Downloads \(Version \K[0-9.]+')
+SOURCETREE=$(curl -s https://www.sourcetreeapp.com/ | grep -oP 'SourceTreeSetup-\K[0-9]+(\.[0-9]+)*' | head -n 1)
+SUBTITLEEDIT=$(curl -s https://github.com/SubtitleEdit/subtitleedit/releases | grep -oP -m 1 'Subtitle Edit \K[0-9.]+\.[0-9.]+\.[0-9.]+')
+SUMATRAPDF=$(curl -s https://www.sumatrapdfreader.org/free-pdf-reader | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+SWEETHOME3D=$(curl -s https://www.sweethome3d.com/hu/ | grep -oP 'version \K[0-9.]+\.[0-9.]+\.[0-9.]+' | sort -u)
+TORTOISEGIT=$(curl -s https://tortoisegit.org/ | grep -Eo "Stable: [0-9]+\.[0-9]+\.[0-9]+" | sed -E 's/Stable: ([0-9]+\.[0-9]+\.[0-9]+)/\1/')
+VEYON=$(curl -s https://veyon.io/en/download/ | grep -Eo 'veyon-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-win64-setup.exe' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
+VBOX=$(curl -s https://www.virtualbox.org/wiki/Downloads | grep -Eo "VirtualBox [0-9]+\.[0-9]+\.[0-9]+ platform packages" | sed -E 's/VirtualBox ([0-9]+\.[0-9]+\.[0-9]+) platform packages/\1/')
+VLC=$(curl -s https://download.videolan.org/pub/videolan/vlc/ | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | sort -V | tail -n 1)
+VSCODE=$(curl -s https://code.visualstudio.com/sha\?build\=stable | grep -oP '"productVersion":"\K[0-9.]+' | head -n1)
+WINSCP=$(curl -s https://winscp.net/eng/download.php | grep -Eo "WinSCP [0-9]+\.[0-9]+ Download" | sed -E 's/WinSCP ([0-9]+\.[0-9]+) Download/\1/')
+WIRESHARK=$(curl -s https://www.wireshark.org/download.html | grep -Eo "Stable Release: [0-9]+\.[0-9]+\.[0-9]+" | head -n 1 | sed 's/Stable Release: //')
+WINMERGE=$(curl -s https://winmerge.org/ | grep -oP 'WinMerge \K[0-9.]+' | head -n 1 | sed 's/WinMerge //')
+XNVIEW=$(curl -s https://www.xnview.com/en/xnview/ | grep -Eo "Version [0-9]+\.[0-9]+\.[0-9]+" | head -n 1 | sed 's/Version //')
+ZOTERO=$(curl -s https://www.zotero.org/download/ | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+'| sort -V | tail -n 1)
+
+# Dátum
+DATUM=$(date +"%Y-%m-%d %H:%M")
+
+# HTML fájl generálása
+cat <<EOL > index.html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szoftver Verzió Lista</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-top: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+	    margin: 0 0 0px 0; /* eredeti:margin: 0 0 25px 0; a 25px a kék vonal utáni távolság */
+	    font-size: 2em;
+	    position: relative;
+	    padding-bottom: 0px; /* főcím alatti tér, eredei 10px */
+        }
+	/* Kék vonal */
+	h2:after {
+	   content: '';
+	   display: block;
+	   width: 50px;
+	   height: 3px; /* kék vonal magasság */
+	   background: #3498db;
+	   margin: 10px auto 0; /* főcím és a kék vonal közötti távolság */
+	}
+	p {
+	   color: #2c3e50;
+	   font-size: small;
+	}
+		
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Elérhető Legfrisseb Szoftver Verziók</h2>
+    <p><em>Frissítve: $DATUM</em></p>
+    
+    <input type="text" id="searchInput" placeholder="Keresés a szoftverek között...">
+	
+    <table id="softwareTable">
+	<thead>
+            <tr><th>Szoftver</th><th>Verzió</th></tr>
+        </thead>
+	   <tbody>
+		<tr><td><a href="https://www.7-zip.org/download.html" target="_blank">7-Zip</td><td>$HETZIP</a></td></tr>
+		<tr><td><a href="https://www.audacityteam.org/" target="_blank">Audacity</td><td>$AUDACITY</a></td></tr>
+		<tr><td>Autospy</td><td>$AUTOSPY</td></tr>
+		<tr><td>Avidemux Video Editor</td><td>$AVIDEMUX</td></tr>
+		<tr><td>Blender</td><td>$BLENDER</td></tr>
+		<tr><td>Calibre-eBook</td><td>$CALIBRE</td></tr>
+		<tr><td>CamStudio</td><td>$CAMSTUDIO</li>
+		<tr><td>Colour Contrast Analyzer (CCA)</td><td>$CCA</td></tr>
+		<tr><td>CDBurnerXP</td><td>$CDBURNERXP</td></tr>
+		<tr><td>Cyberduck </td><td>$CYBERDUCK</td></tr>
+		<tr><td>DBeaver Community</td><td>$DBEAVER</td></tr>
+		<tr><td>Ditto</td><td>$DITTO</td></tr>
+		<tr><td>Double Commander</td><td>$DOUBLECMD</td></tr>
+		<tr><td>FastStone Image Viewer</td><td>$FASTSTONE</td></tr>
+		<tr><td>Firefox ESR</td><td>$FIREFOXESR</td></tr>
+		<tr><td>FreeCAD</td><td>$FREECAD</td></tr>
+		<tr><td>GeoGebra</td><td>$GEOGEBRA</td></tr>
+		<tr><td>GIMP</td><td>$GIMP</td></tr>
+		<tr><td>Git</td><td>$GIT</td></tr>
+		<tr><td>Gretl</td><td>$GRETL</td></tr>
+		<tr><td>HandBrake</td><td>$HANDBRAKE</td></tr>
+		<tr><td>IrfanView</td><td>$IRFANVIEW</td></tr>
+		<tr><td>Java (OpenJDK) x64 8-LTS</td><td>$OPENJDK</td></tr>
+		<tr><td>JASP</td><td>$JASP</td></tr>
+		<tr><td>kdenlive Video Editor</td><td>$KDENLIVE</td></tr>
+		<tr><td>KeePass</td><td>$KEEPASS</td></tr>
+		<tr><td>LibreOffice</td><td>$LIBREOFFICE</td></tr>
+		<tr><td>LogExpert</td><td>$LOGEXPERT</td></tr>
+		<tr><td>Notepad++</td><td>$NOTEPADPLSZ</td></tr>
+		<tr><td>OBS Studio</td><td>$OBSSTUDIO</td></tr>
+		<tr><td>Open-Shell</td><td>$OPENSHELL</td></tr>
+		<tr><td>OpenShot Video Editor</td><td>$OPENSHOT</td></tr>
+		<tr><td>Opera</td><td>$OPERA</td></tr>
+		<tr><td>PAC - PDF Accessibility Checker</td><td>$PAC</td></tr>
+		<tr><td>PeaZip</td><td>$PEAZIP</td></tr>
+		<tr><td>PDF24 Creator</td><td>$PDF24</td></tr>
+		<tr><td>PDFsam Basic</td><td>$PDFSAM</td></tr>
+		<tr><td>Phoenix Code</td><td>$PHOENIXCODE</td></tr>
+		<tr><td>Powershell 7</td><td>$POWERSHELL7</td></tr>
+		<tr><td>Putty</td><td>$PUTTY</td></tr>
+		<tr><td>R program</td><td>$RPROGRAM</td></tr>
+		<tr><td>RStudio</td><td>$RSTUDIO</td></tr>
+		<tr><td>Safe Exam Browser</td><td>$SEB</td></tr>
+		<tr><td>Shotcut</td><td>$SHOTCUT</td></tr>
+		<tr><td>Sigil</td><td>$SIGIL</td></tr>
+		<tr><td>SoapUI</td><td>$SOAPUI</td></tr>
+		<tr><td>Source Tree</td><td>$SOURCETREE</td></tr>
+		<tr><td>Subtitle Edit</td><td>$SUBTITLEEDIT</td></tr>
+		<tr><td>Sumatra PDF</td><td>$SUMATRAPDF</td></tr>
+		<tr><td>Sweet Home 3D</td><td>$SWEETHOME3D</td></tr>
+		<tr><td>TortoiseGit</td><td>$TORTOISEGIT</td></tr>
+		<tr><td>Veyon</td><td>$VEYON</td></tr>
+		<tr><td>VirtualBox</td><td>$VBOX</td></tr>
+		<tr><td>Visual Studio Code</td><td>$VSCODE</td></tr>
+		<tr><td>VLC</td><td>$VLC</td></tr>
+		<tr><td>WinMerge</td><td>$WINMERGE</td></tr>
+		<tr><td>WinSCP</td><td>$WINSCP</td></tr>
+		<tr><td>Wireshark</td><td>$WIRESHARK</td></tr>
+		<tr><td>XnView Classic</td><td>$XNVIEW</td></tr>
+	   	<tr><td>Zotero</td><td>$ZOTERO</td></tr>
+	  </tbody>
+	</table>
+
+	<script>
+        const searchInput = document.getElementById('searchInput');
+        const table = document.getElementById('softwareTable');
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        searchInput.addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            for (let i = 0; i < rows.length; i++) {
+                const rowText = rows[i].textContent.toLowerCase();
+                rows[i].style.display = rowText.includes(filter) ? '' : 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
+EOL
+
+echo "7-Zip $HETZIP"
+echo "Audactiy: $AUDACITY"
+echo "Autospy: $AUTOSPY"
+echo "Avidemux Video Editor: $AVIDEMUX"
+echo "Blender: $BLENDER"
+echo "Calibre-eBook: $CALIBRE"
+echo "CamStudio $CAMSTUDIO"
+echo "CCA: $CCA"
+echo "CDBurnerXP: $CDBURNERXP"
+echo "Cyberduck: $CYBERDUCK"
+echo "DBeaver Community: $DBEAVER"
+echo "Ditto $DITTO"
+echo "Double Commander: $DOUBLECMD"
+echo "FastStome Image Viewer: $FASTSTONE"
+echo "Firefox ESR: $FIREFOXESR"
+echo "FreeCAD: $FREECAD"
+echo "GeoGebra $GEOGEBRA"
+echo "GIMP: $GIMP"
+echo "Git: $GIT"
+echo "Gretl $GRETL"
+echo "HandBrake: $HANDBRAKE"
+echo "IrfanView $IRFANVIEW"
+echo "Java (OpenJDK)x64 8-LTS$OPENJDK"
+echo "JASP $JASP"
+echo "kdenlive Free and Open Source Video Editor $KDENLIVE"
+echo "KeePass: $KEEPASS"
+echo "LibreOffice $LIBREOFFICE"
+echo "LogExpert $LOGEXPERT"
+echo "Notepad++: $NOTEPADPLSZ"
+echo "OBS Studio: $OBSSTUDIO"
+echo "Open-Shell: $OPENSHELL"
+echo "OpenShot Video Editor: $OPENSHOT"
+echo "Opera: $OPERA"
+echo "PDF Accessibility: PAC $PAC "
+echo "PeaZip: $PEAZIP"
+echo "PDF24 Creator: $PDF24"
+echo "PDFsam Basic: $PDFSAM"
+echo "Phoenix Code:$PHOENIXCODE"
+echo "Powershell 7 $POWERSHELL7"
+echo "Putty: $PUTTY"
+echo "R program $RPROGRAM"
+echo "RStudio: $RSTUDIO"
+echo "Safe Exam Browser $SEB"
+echo "Shotcut $SHOTCUT"
+echo "Sigil $SIGIL"
+echo "SoapUI: $SOAPUI"
+echo "SourceTree: $SOURCETREE"
+echo "Subtitle Edit: $SUBTITLEEDIT"
+echo "Sumatra PDF: $SUMATRAPDF"
+echo "Sweet Home 3D: $SWEETHOME3D"
+echo "TortoiseGit: $TORTOISEGIT"
+echo "Veyon: $VEYON"
+echo "VirtualBox $VBOX"
+echo "Visual Studio Code: $VSCODE"
+echo "VLC: $VLC"
+echo "WinMerge $WINMERGE"
+echo "WinSCP: $WINSCP"
+echo "Wireshark: $WIRESHARK"
+echo "XnView Classic: $XNVIEW"
+echo "Zotero: $ZOTERO"

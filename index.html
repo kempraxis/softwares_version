@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szoftver Verzió Lista</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-top: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+	    margin: 0 0 0px 0; /* eredeti:margin: 0 0 25px 0; a 25px a kék vonal utáni távolság */
+	    font-size: 2em;
+	    position: relative;
+	    padding-bottom: 0px; /* főcím alatti tér, eredei 10px */
+        }
+	/* Kék vonal */
+	h2:after {
+	   content: '';
+	   display: block;
+	   width: 50px;
+	   height: 3px; /* kék vonal magasság */
+	   background: #3498db;
+	   margin: 10px auto 0; /* főcím és a kék vonal közötti távolság */
+	}
+	p {
+	   color: #2c3e50;
+	   font-size: small;
+	}
+		
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Elérhető Legfrisseb Szoftver Verziók</h2>
+    <p><em>Frissítve: 2025-05-09 08:38</em></p>
+    
+    <input type="text" id="searchInput" placeholder="Keresés a szoftverek között...">
+	
+    <table id="softwareTable">
+	<thead>
+            <tr><th>Szoftver</th><th>Verzió</th></tr>
+        </thead>
+	   <tbody>
+		<tr><td><a href="https://www.7-zip.org/download.html" target="_blank">7-Zip</td><td>24.09</a></td></tr>
+		<tr><td><a href="https://www.audacityteam.org/" target="_blank">Audacity</td><td>3.7.3</a></td></tr>
+		<tr><td>Autospy</td><td>4.22.1</td></tr>
+		<tr><td>Avidemux Video Editor</td><td>2.8.1</td></tr>
+		<tr><td>Blender</td><td>4.4.3</td></tr>
+		<tr><td>Calibre-eBook</td><td>8.4.0</td></tr>
+		<tr><td>CamStudio</td><td>3.0</li>
+		<tr><td>Colour Contrast Analyzer (CCA)</td><td>3.5.4</td></tr>
+		<tr><td>CDBurnerXP</td><td>4.5.8.7128</td></tr>
+		<tr><td>Cyberduck </td><td>9.1.4.43177</td></tr>
+		<tr><td>DBeaver Community</td><td>25.0.4</td></tr>
+		<tr><td>Ditto</td><td>3.24.246.0</td></tr>
+		<tr><td>Double Commander</td><td>1.1.24</td></tr>
+		<tr><td>FastStone Image Viewer</td><td>8.0</td></tr>
+		<tr><td>Firefox ESR</td><td>128.10.0esr</td></tr>
+		<tr><td>FreeCAD</td><td>1.0.0</td></tr>
+		<tr><td>GeoGebra</td><td>6-0-882-0</td></tr>
+		<tr><td>GIMP</td><td>3.0.2</td></tr>
+		<tr><td>Git</td><td>2.49.0</td></tr>
+		<tr><td>Gretl</td><td>2025a</td></tr>
+		<tr><td>HandBrake</td><td>1.9.2</td></tr>
+		<tr><td>IrfanView</td><td>4.70</td></tr>
+		<tr><td>Java (OpenJDK) x64 8-LTS</td><td>8u452b09</td></tr>
+		<tr><td>JASP</td><td>0.19.3</td></tr>
+		<tr><td>kdenlive Video Editor</td><td>25.04.0</td></tr>
+		<tr><td>KeePass</td><td>2.58</td></tr>
+		<tr><td>LibreOffice</td><td>25.2.3</td></tr>
+		<tr><td>LogExpert</td><td>1.12.0</td></tr>
+		<tr><td>Notepad++</td><td>8.8.1</td></tr>
+		<tr><td>OBS Studio</td><td>31.0.2</td></tr>
+		<tr><td>Open-Shell</td><td>4.4.196</td></tr>
+		<tr><td>OpenShot Video Editor</td><td>3.3.0</td></tr>
+		<tr><td>Opera</td><td>118.0.5461.83</td></tr>
+		<tr><td>PAC - PDF Accessibility Checker</td><td>24.4.1</td></tr>
+		<tr><td>PeaZip</td><td>10.4.0</td></tr>
+		<tr><td>PDF24 Creator</td><td>11.25.1</td></tr>
+		<tr><td>PDFsam Basic</td><td>5.3.1</td></tr>
+		<tr><td>Phoenix Code</td><td>4.0.3</td></tr>
+		<tr><td>Powershell 7</td><td>7.5.1</td></tr>
+		<tr><td>Putty</td><td>0.83</td></tr>
+		<tr><td>R program</td><td>4.5.0</td></tr>
+		<tr><td>RStudio</td><td>2025.05.0-496</td></tr>
+		<tr><td>Safe Exam Browser</td><td>3.9.0</td></tr>
+		<tr><td>Shotcut</td><td>25.03.29</td></tr>
+		<tr><td>Sigil</td><td>2.4.2</td></tr>
+		<tr><td>SoapUI</td><td>5.8.0</td></tr>
+		<tr><td>Source Tree</td><td>3.4.23</td></tr>
+		<tr><td>Subtitle Edit</td><td>4.0.12</td></tr>
+		<tr><td>Sumatra PDF</td><td>3.5.2</td></tr>
+		<tr><td>Sweet Home 3D</td><td>7.5.17</td></tr>
+		<tr><td>TortoiseGit</td><td>2.17.0</td></tr>
+		<tr><td>Veyon</td><td>4.9.5.0</td></tr>
+		<tr><td>VirtualBox</td><td>7.1.8</td></tr>
+		<tr><td>Visual Studio Code</td><td>1.100.0</td></tr>
+		<tr><td>VLC</td><td>3.0.21</td></tr>
+		<tr><td>WinMerge</td><td>2.16.48.2</td></tr>
+		<tr><td>WinSCP</td><td>6.5</td></tr>
+		<tr><td>Wireshark</td><td>4.4.6</td></tr>
+		<tr><td>XnView Classic</td><td>2.52.1</td></tr>
+	   	<tr><td>Zotero</td><td>7.0.15</td></tr>
+	  </tbody>
+	</table>
+
+	<script>
+        const searchInput = document.getElementById('searchInput');
+        const table = document.getElementById('softwareTable');
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        searchInput.addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            for (let i = 0; i < rows.length; i++) {
+                const rowText = rows[i].textContent.toLowerCase();
+                rows[i].style.display = rowText.includes(filter) ? '' : 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Kinyeri a legfrissebb verziót
+HETZIP=$(curl -s https://www.7-zip.org/ | grep -Eo -m 1 "24\.[0-9]+<" | cut -d "<" -f1)
+DOUBLECMD=$(curl -s https://sourceforge.net/p/doublecmd/wiki/Download/ | grep -Eo -m 1 'doublecmd-.*?\.x86_64-win64\.msi' | cut -d ">" -f1 | sed -E 's/^[^-]+-([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+AUDACITY=$(curl -s https://www.audacityteam.org/download/windows/ | grep -Eo -m 1 "audacity-win-.*?-64bit.exe" | cut -d "-" -f3)
+AUTOSPY=$(curl -s https://www.autopsy.com/download/ | grep -Eo 'autopsy-[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+BLENDER=$(curl -s https://www.blender.org/download/ | grep -Eo -m 1 "blender-.*?-windows-x64.msi" | cut -d "-" -f2)
+CALIBRE=$(curl -s https://calibre-ebook.com/download_windows | grep -Eo 'calibre-64bit-[0-9]+\.[0-9]+\.[0-9]+\.msi' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+CYBERDUCK=$(curl -s https://cyberduck.io/changelog/ | grep -Eo 'Cyberduck-Installer-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.msi' | sed -E 's/Cyberduck-Installer-([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\.msi/\1/' | sort -V | tail -n 1)
+GIMP=$(curl -s https://www.gimp.org/ | grep -Eo 'DOWNLOAD .*[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+KEEPASS=$(curl -s https://keepass.info/download.html | grep -Eo -m 1 'KeePass-.*?-Setup.exe' | grep -Eo '[0-9]+\.[0-9]+')
+NOTEPADPLSZ=$(curl -s https://notepad-plus-plus.org/ | grep -Eo "Current Version 8\.[0-9]\.[0-9]+<" | cut -d "<" -f1 | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+PDF24=$(curl -s https://tools.pdf24.org/hu/creator | grep -Eo -m 1 '.*[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+
+
+# HTML fájl generálása
+cat <<EOL > index.html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verzió Lista</title>
+</head>
+<body>
+    <h1>Elérhető Legfrisseb Szoftver Verziók</h1>
+    <ul>
+        <li>7-Zip $HETZIP</li>
+	<li>Audacity $AUDACITY</li>
+	<li>Autospy $AUTOSPY</li> 
+	<li>Blender $BLENDER</li>
+	<li>Calibre-eBook $CALIBRE</li>
+	<li>Cyberduck $CYBERDUCK</li>
+	<li>GIMP $GIMP</li>
+	<li>Double Commander $DOUBLECMD</li>
+	<li>KeePass $KEEPASS</li>
+	<li>Notepad++ $NOTEPADPLSZ</li>
+	<li>PDF24 Creator $PDF24</li>
+    </ul>
+</body>
+</html>
+EOL
+
+echo "7-Zip $HETZIP"
+echo "Audactiy: $AUDACITY"
+echo "Autospy: $AUTOSPY"
+echo "Blender: $BLENDER"
+echo "Calibre-eBook: $CALIBRE"
+echo "Cyberduck: $CYBERDUCK"
+echo "Double Commander: $DOUBLECMD"
+echo "GIMP: $GIMP"
+echo "KeePass: $KEEPASS"
+echo "Notepad++: $NOTEPADPLSZ"
+echo "PDF24 Creator: $PDF24"

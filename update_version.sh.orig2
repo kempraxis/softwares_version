@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# Kinyeri a legfrissebb verziót
+HETZIP=$(curl -s https://www.7-zip.org/ | grep -Eo -m 1 "24\.[0-9]+<" | cut -d "<" -f1)
+DOUBLECMD=$(curl -s https://sourceforge.net/p/doublecmd/wiki/Download/ | grep -Eo -m 1 'doublecmd-.*?\.x86_64-win64\.msi' | cut -d ">" -f1 | sed -E 's/^[^-]+-([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+AUDACITY=$(curl -s https://www.audacityteam.org/download/windows/ | grep -Eo -m 1 "audacity-win-.*?-64bit.exe" | cut -d "-" -f3)
+AUTOSPY=$(curl -s https://www.autopsy.com/download/ | grep -Eo 'autopsy-[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+BLENDER=$(curl -s https://www.blender.org/download/ | grep -Eo -m 1 "blender-.*?-windows-x64.msi" | cut -d "-" -f2)
+CALIBRE=$(curl -s https://calibre-ebook.com/download_windows | grep -Eo 'calibre-64bit-[0-9]+\.[0-9]+\.[0-9]+\.msi' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+CCA=$(curl -s https://www.tpgi.com/color-contrast-checker/ | grep -Eo 'CCA-Setup-[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+CYBERDUCK=$(curl -s https://cyberduck.io/changelog/ | grep -Eo 'Cyberduck-Installer-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.msi' | sed -E 's/Cyberduck-Installer-([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\.msi/\1/' | sort -V | tail -n 1)
+DBEAVER=$(curl -s https://dbeaver.io/download/ | grep -Eo -m 1 'DBeaver Community [0-9]+\.[0-9]+\.[0-9]+'| grep -Eo '[0-9]+\.[0-9]+\.[0-9]')
+FASTSTONE=$(curl -s https://www.faststone.org/FSIVDownload.htm | grep -Eo "FastStone Image Viewer [0-9]+\.[0-9]+" | grep -Eo '[0-9]+\.[0-9]+')
+FIREFOXESR=$(curl -s https://ftp.mozilla.org/pub/firefox/releases/ | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+esr'| sort -V | tail -n 1)
+FREECAD=$(curl -s https://www.freecad.org/downloads.php | grep -Eo -m 1 'FreeCAD.*?\.[0-9]+\.[0-9]+' | cut -d "/" -f5)
+GIMP=$(curl -s https://www.gimp.org/ | grep -Eo 'DOWNLOAD .*[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+GIT=$(curl -s https://git-scm.com/downloads/win | grep -Eo -m 1 'Git-[0-9]+\.[0-9]+\.[0-9]-64-bit.exe' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+KEEPASS=$(curl -s https://keepass.info/download.html | grep -Eo -m 1 'KeePass-.*?-Setup.exe' | grep -Eo '[0-9]+\.[0-9]+')
+NOTEPADPLSZ=$(curl -s https://notepad-plus-plus.org/ | grep -Eo "Current Version 8\.[0-9]\.[0-9]+<" | cut -d "<" -f1 | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+OPERA=$(curl -s https://get.geo.opera.com/pub/opera/desktop/ | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort -V | tail -n 1)
+PDF24=$(curl -s https://tools.pdf24.org/hu/creator | grep -Eo -m 1 '.*[0-9]+\.[0-9]+\.[0-9]+' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+SUBTITLEEDIT=$(curl -s https://github.com/SubtitleEdit/subtitleedit/releases | grep -oP -m 1 'Subtitle Edit \K[0-9.]+\.[0-9.]+\.[0-9.]+')
+SUMATRAPDF=$(curl -s https://www.sumatrapdfreader.org/free-pdf-reader | grep -Eo -m 1 '[0-9]+\.[0-9]+\.[0-9]+')
+SWEETHOME3D=$(curl -s https://www.sweethome3d.com/hu/ | grep -oP 'version \K[0-9.]+\.[0-9.]+\.[0-9.]+' | sort -u)
+TORTOISEGIT=$(curl -s https://tortoisegit.org/ | grep -Eo "Stable: [0-9]+\.[0-9]+\.[0-9]+" | sed -E 's/Stable: ([0-9]+\.[0-9]+\.[0-9]+)/\1/')
+VEYON=$(curl -s https://veyon.io/en/download/ | grep -Eo 'veyon-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-win64-setup.exe' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
+VBOX=$(curl -s https://www.virtualbox.org/wiki/Downloads | grep -Eo "VirtualBox [0-9]+\.[0-9]+\.[0-9]+ platform packages" | sed -E 's/VirtualBox ([0-9]+\.[0-9]+\.[0-9]+) platform packages/\1/')
+VLC=$(curl -s https://download.videolan.org/pub/videolan/vlc/ | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | sort -V | tail -n 1)
+WINSCP=$(curl -s https://winscp.net/eng/download.php | grep -Eo "WinSCP [0-9]+\.[0-9]+ Download" | sed -E 's/WinSCP ([0-9]+\.[0-9]+) Download/\1/')
+WIRESHARK=$(curl -s https://www.wireshark.org/download.html | grep -Eo "Stable Release: [0-9]+\.[0-9]+\.[0-9]+" | head -n 1 | sed 's/Stable Release: //')
+WINMERGE=$(curl -s https://winmerge.org/ | grep -Eo "WinMerge [0-9]+\.[0-9]+\.[0-9]+ - latest stable version" | sed -E 's/WinMerge ([0-9]+\.[0-9]+\.[0-9]+) - latest stable version/\1/')
+XNVIEW=$(curl -s https://www.xnview.com/en/xnview/ | grep -Eo "Version [0-9]+\.[0-9]+\.[0-9]+" | head -n 1 | sed 's/Version //')
+ZOTERO=$(curl -s https://www.zotero.org/download/ | grep -Eo "[0-9]+\.[0-9]+\.[0-9]+" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+'| sort -V | tail -n 1)
+
+
+# HTML fájl generálása
+cat <<EOL > index.html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verzió Lista</title>
+</head>
+<body>
+    <h1>Elérhető Legfrisseb Szoftver Verziók</h1>
+    <ul>
+        <li><a href="https://www.7-zip.org/download.html" target="_blank">7-Zip $HETZIP</a></li>
+	<li><a href="https://www.audacityteam.org/" target="_blank">Audacity $AUDACITY</a></li>
+	<li>Autospy $AUTOSPY</li> 
+	<li>Blender $BLENDER</li>
+	<li>Calibre-eBook $CALIBRE</li>
+	<li>Colour Contrast Analyzer (CCA) $CCA</li>
+	<li>Cyberduck $CYBERDUCK</li>
+	<li>DBeaver Community $DBEAVER</li>
+	<li>Double Commander $DOUBLECMD</li>
+	<li>FastStone Image Viewer $FASTSTONE</li> 
+	<li>Firefox ESR $FIREFOXESR</li>
+	<li>FreeCAD $FREECAD</li>
+	<li>GIMP $GIMP</li>
+	<li>Git $GIT</li>
+	<li>KeePass $KEEPASS</li>
+	<li>Notepad++ $NOTEPADPLSZ</li>
+	<li>Opera $OPERA</li>
+	<li>PDF24 Creator $PDF24</li>
+	<li>Subtitle Edit $SUBTITLEEDIT</li>
+	<li>Sumatra PDF $SUMATRAPDF</li>
+	<li>Sweet Home 3D $SWEETHOME3D</li>
+	<li>TortoiseGit $TORTOISEGIT</li>
+	<li>Veyon $VEYON</li>
+	<li>VirtualBox $VBOX</li>
+	<li>VLC $VLC</li>
+	<li>WinMerge $WINMERGE</li>
+	<li>WinSCP $WINSCP</li>
+	<li>Wireshark $WIRESHARK</li>
+	<li>XnView Classic $XNVIEW</li>
+	<li>Zotero $ZOTERO</li>
+    </ul>
+</body>
+</html>
+EOL
+
+echo "7-Zip $HETZIP"
+echo "Audactiy: $AUDACITY"
+echo "Autospy: $AUTOSPY"
+echo "Blender: $BLENDER"
+echo "Calibre-eBook: $CALIBRE"
+echo "CCA: $CCA"
+echo "Cyberduck: $CYBERDUCK"
+echo "Double Commander: $DOUBLECMD"
+echo "DBeaver Community: $DBEAVER"
+echo "Git: $GIT"
+echo "GIMP: $GIMP"
+echo "FastStome Image Viewer: $FASTSTONE"
+echo "Firefox ESR: $FIREFOXESR"
+echo "FreeCAD: $FREECAD"
+echo "KeePass: $KEEPASS"
+echo "Notepad++: $NOTEPADPLSZ"
+echo "Opera: $OPERA"
+echo "PDF24 Creator: $PDF24"
+echo "Subtitle Edit: $SUBTITLEEDIT"
+echo "Sumatra PDF: $SUMATRAPDF"
+echo "Sweet Home 3D: $SWEETHOME3D"
+echo "TortoiseGit: $TORTOISEGIT"
+echo "Veyon: $VEYON"
+echo "VirtualBox $VBOX"
+echo "VLC: $VLC"
+echo "WinMerge $WINMERGE"
+echo "WinSCP: $WINSCP"
+echo "Wireshark: $WIRESHARK"
+echo "XnView Classic: $XNVIEW"
+echo "Zotero: $ZOTERO"

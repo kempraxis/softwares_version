@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Kinyeri a legfrissebb verziót
+HETZIP=$(curl -s https://www.7-zip.org/ | grep -Eo -m 1 "24\.[0-9]+<" | cut -d "<" -f1)
+
+# HTML fájl generálása
+cat <<EOL > index.html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verzió Lista</title>
+</head>
+<body>
+    <h1>Elérhető Szoftver Verziók</h1>
+    <ul>
+        <li>7-Zip $HETZIP</li>
+    </ul>
+</body>
+</html>
+EOL
+
+echo "A verzió frissítve: 7-Zip $HETZIP"
+
